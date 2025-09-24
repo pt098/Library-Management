@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <script>
+      // redirect to login if not authenticated
+      if (!localStorage.getItem('token')) {
+        window.location.href = '/login';
+      }
+    </script>
+    <div class="container">
+        <header class="header">
+            <h1>Library Management System</h1>
+            <p>Manage books, members, and loans efficiently</p>
+            <div>
+                <button id="logoutBtn" class="nav-btn" style="margin-top:10px;">Logout</button>
+            </div>
+        </header>
+
+        <nav class="nav">
+            <button class="nav-btn active" data-section="books">📖 Books</button>
+            <button class="nav-btn" data-section="members">👥 Members</button>
+            <button class="nav-btn" data-section="loans">📋 Loans</button>
+            <button class="nav-btn" data-section="borrow">🔄 Borrow Book</button>
+        </nav>
+
+        <main class="main-content">
+            <!-- Books Section -->
+            <section id="booksSection" class="section active">
+                <h2>📖 Books Management</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>Add New Book</h3>
+                        <form id="addBookForm">
+                            <div class="form-group">
+                                <label for="title">Title:</label>
+                                <input type="text" id="title" name="title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="author">Author:</label>
+                                <input type="text" id="author" name="author" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="isbn">ISBN (optional):</label>
+                                <input type="text" id="isbn" name="isbn">
+                            </div>
+                            <div class="form-group">
+                                <label for="copies">Copies:</label>
+                                <input type="number" id="copies" name="copies" min="1" value="1" required>
+                            </div>
+                            <button type="submit" class="btn">Add Book</button>
+                        </form>
+                    </div>
+                </div>
+
+                <h3>All Books</h3>
+                <div class="table-container">
+                    <table id="booksTable">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>ISBN</th>
+                                <th>Available Copies</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Books will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Members Section -->
+            <section id="membersSection" class="section">
+                <h2>👥 Members Management</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>Add New Member</h3>
+                        <form id="addMemberForm">
+                            <div class="form-group">
+                                <label for="memberName">Name:</label>
+                                <input type="text" id="memberName" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <button type="submit" class="btn">Add Member</button>
+                        </form>
+                    </div>
+                </div>
+
+                <h3>All Members</h3>
+                <div class="table-container">
+                    <table id="membersTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Joined Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Members will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Loans Section -->
+            <section id="loansSection" class="section">
+                <h2>Loans Management</h2>
+                
+                <h3>All Loans</h3>
+                <div class="table-container">
+                    <table id="loansTable">
+                        <thead>
+                            <tr>
+                                <th>Book</th>
+                                <th>Member</th>
+                                <th>Borrowed Date</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loans will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Borrow Book Section -->
+            <section id="borrowSection" class="section">
+                <h2>Borrow a Book</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>Borrow Book</h3>
+                        <form id="borrowForm">
+                            <div class="form-group">
+                                <label for="bookId">Select Book:</label>
+                                <select id="bookId" name="bookId" required>
+                                    <option value="">Select a book</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="memberId">Select Member:</label>
+                                <select id="memberId" name="memberId" required>
+                                    <option value="">Select a member</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="days">Loan Duration (days):</label>
+                                <select id="days" name="days" required>
+                                    <option value="7">7 days</option>
+                                    <option value="14">14 days</option>
+                                    <option value="21">21 days</option>
+                                    <option value="30">30 days</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn">Borrow Book</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            
+        </main>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
